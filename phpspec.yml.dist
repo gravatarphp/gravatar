@@ -1,0 +1,5 @@
+suites:
+  gravatar_suite:
+    namespace: Gravatar
+    psr4_prefix: Gravatar
+formatter.name: pretty
