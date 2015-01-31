@@ -91,6 +91,8 @@ $urlBuilder->vcard();
 $urlBuilder->qrCode();
 ```
 
+**Note:** Profile, vCard and QR Code requests will only work with the primary email address. This is a limitation of Gravatar. However the builder won't complain, since it doesn't know if it is your primary address or not. For more tips and details check the [Gravatar documentation](http://gravatar.com/site/implement/).
+
 
 ## Testing
 
