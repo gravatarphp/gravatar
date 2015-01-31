@@ -25,7 +25,7 @@ class SingleUrlBuilder extends AbstractUrlBuilder
 
     /**
      * @param string  $email
-     * @param boolean $secure
+     * @param boolean $useHttps
      */
     public function __construct($email, $useHttps = true)
     {

@@ -30,7 +30,7 @@ abstract class AbstractUrlBuilder
     protected $useHttps;
 
     /**
-     * @param boolean $secure
+     * @param boolean $useHttps
      */
     public function __construct($useHttps = true)
     {
