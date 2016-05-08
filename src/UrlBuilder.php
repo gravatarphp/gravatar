@@ -1,25 +1,16 @@
 <?php
 
-/*
- * This file is part of the Gravatar package.
- *
- * (c) Márk Sági-Kazár <mark.sagikazar@gmail.com>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
 namespace Gravatar;
 
 /**
- * Gravatar URL Builder
+ * Gravatar URL Builder.
  *
  * @author Márk Sági-Kazár <mark.sagikazar@gmail.com>
  */
-class UrlBuilder extends AbstractUrlBuilder
+class UrlBuilder extends BaseUrlBuilder
 {
     /**
-     * Returns an Avatar URL
+     * Returns an Avatar URL.
      *
      * @param string $email
      * @param array  $options
@@ -28,11 +19,11 @@ class UrlBuilder extends AbstractUrlBuilder
      */
     public function avatar($email, array $options = [])
     {
-        return $this->buildUrl('avatar/'.$this->createEmailHash($email));
+        return $this->buildUrl('avatar/'.$this->createEmailHash($email), $options);
     }
 
     /**
-     * Returns a profile URL
+     * Returns a profile URL.
      *
      * @param string $email
      *
@@ -44,7 +35,7 @@ class UrlBuilder extends AbstractUrlBuilder
     }
 
     /**
-     * Returns a vCard URL
+     * Returns a vCard URL.
      *
      * @param string $email
      *
@@ -56,7 +47,7 @@ class UrlBuilder extends AbstractUrlBuilder
     }
 
     /**
-     * Returns a QR Code URL
+     * Returns a QR Code URL.
      *
      * @param string $email
      *

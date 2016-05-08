@@ -1,22 +1,13 @@
 <?php
 
-/*
- * This file is part of the Gravatar package.
- *
- * (c) Márk Sági-Kazár <mark.sagikazar@gmail.com>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
 namespace Gravatar;
 
 /**
- * Provides helper for procedural functions
+ * Provides helper for static access.
  *
  * @author Márk Sági-Kazár <mark.sagikazar@gmail.com>
  */
-class Util
+class StaticUrlBuilder
 {
     /**
      * @var UrlBuilder
@@ -24,23 +15,23 @@ class Util
     protected static $urlBuilder;
 
     /**
-     * Returns an UrlBuilder instance
+     * Returns an UrlBuilder instance.
      *
      * @return UrlBuilder
      */
     protected static function getUrlBuilder()
     {
         if (!isset(static::$urlBuilder)) {
-            static::$urlBuilder = new UrlBuilder;
+            static::$urlBuilder = new UrlBuilder();
         }
 
         return static::$urlBuilder;
     }
 
     /**
-     * Sets the used connection endpoint
+     * Sets the used connection endpoint.
      *
-     * @param boolean $useHttps
+     * @param bool $useHttps
      */
     public static function useHttps($useHttps)
     {
@@ -48,7 +39,7 @@ class Util
     }
 
     /**
-     * Returns an Avatar URL
+     * Returns an Avatar URL.
      *
      * @param string $email
      * @param array  $options
@@ -61,7 +52,7 @@ class Util
     }
 
     /**
-     * Returns a profile URL
+     * Returns a profile URL.
      *
      * @param string $email
      *
@@ -73,7 +64,7 @@ class Util
     }
 
     /**
-     * Returns a vCard URL
+     * Returns a vCard URL.
      *
      * @param string $email
      *
@@ -85,7 +76,7 @@ class Util
     }
 
     /**
-     * Returns a QR Code URL
+     * Returns a QR Code URL.
      *
      * @param string $email
      *

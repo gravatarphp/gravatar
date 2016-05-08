@@ -1,36 +1,27 @@
 <?php
 
-/*
- * This file is part of the Gravatar package.
- *
- * (c) Márk Sági-Kazár <mark.sagikazar@gmail.com>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
 namespace Gravatar;
 
 /**
- * Provides common functions for UrlBuilder and SingleUrlBuilder
+ * Provides common functions for UrlBuilder and SingleUrlBuilder.
  *
  * @author Márk Sági-Kazár <mark.sagikazar@gmail.com>
  */
-abstract class AbstractUrlBuilder
+abstract class BaseUrlBuilder
 {
     /**
-     * Gravatar endpoints
+     * Gravatar endpoints.
      */
     const HTTP_ENDPOINT = 'http://www.gravatar.com';
     const HTTPS_ENDPOINT = 'https://secure.gravatar.com';
 
     /**
-     * @var boolean
+     * @var bool
      */
     protected $useHttps;
 
     /**
-     * @param boolean $useHttps
+     * @param bool $useHttps
      */
     public function __construct($useHttps = true)
     {
@@ -38,9 +29,9 @@ abstract class AbstractUrlBuilder
     }
 
     /**
-     * Sets the used connection endpoint
+     * Sets the used connection endpoint.
      *
-     * @param boolean $useHttps
+     * @param bool $useHttps
      */
     public function useHttps($useHttps)
     {
@@ -48,7 +39,7 @@ abstract class AbstractUrlBuilder
     }
 
     /**
-     * Creates a hash from an email address
+     * Creates a hash from an email address.
      *
      * @param string $email
      *
@@ -64,20 +55,24 @@ abstract class AbstractUrlBuilder
     }
 
     /**
-     * Builds the URL based on the given parameters
+     * Builds the URL based on the given parameters.
      *
-     * @param string  $segment
-     * @param array   $params
+     * @param string $segment
+     * @param array  $params
+     *
+     * @return string
      */
     protected function buildUrl($segment, array $params = [])
     {
         $endpoint = $this->useHttps ? self::HTTPS_ENDPOINT : self::HTTP_ENDPOINT;
         $params = array_filter($params);
 
+        $url = sprintf('%s/%s', $endpoint, $segment);
+
         if (!empty($params)) {
-            return sprintf('%s/%s?%s', $endpoint, $segment, http_build_query($params));
+            $url .= '?'.http_build_query($params);
         }
 
-        return sprintf('%s/%s', $endpoint, $segment);
+        return $url;
     }
 }

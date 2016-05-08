@@ -5,9 +5,7 @@
 [![Build Status](https://img.shields.io/travis/gravatarphp/gravatar.svg?style=flat-square)](https://travis-ci.org/gravatarphp/gravatar)
 [![Code Coverage](https://img.shields.io/scrutinizer/coverage/g/gravatarphp/gravatar.svg?style=flat-square)](https://scrutinizer-ci.com/g/gravatarphp/gravatar)
 [![Quality Score](https://img.shields.io/scrutinizer/g/gravatarphp/gravatar.svg?style=flat-square)](https://scrutinizer-ci.com/g/gravatarphp/gravatar)
-[![HHVM Status](https://img.shields.io/hhvm/gravatarphp/gravatar.svg?style=flat-square)](http://hhvm.h4cc.de/package/gravatarphp/gravatar)
 [![Total Downloads](https://img.shields.io/packagist/dt/gravatarphp/gravatar.svg?style=flat-square)](https://packagist.org/packages/gravatarphp/gravatar)
-[![Dependency Status](https://img.shields.io/versioneye/d/php/gravatarphp:gravatar.svg?style=flat-square)](https://www.versioneye.com/php/gravatarphp:gravatar)
 
 **Gravatar URL builder which is most commonly called as a Gravatar library.**
 
@@ -49,22 +47,22 @@ $urlBuilder->qrCode('user@domain.com');
 Or use the static version:
 
 ``` php
-use Gravatar\Util;
+use Gravatar\StaticUrlBuilder as Gravatar;
 
 // True by default
-Util::useHttps(true);
+Gravatar::useHttps(true);
 
 // Returns https://secure.gravatar.com/avatar/EMAIL_HASH
-Util::avatar('user@domain.com');
+Gravatar::avatar('user@domain.com');
 
 // Returns https://secure.gravatar.com/EMAIL_HASH
-Util::profile('user@domain.com');
+Gravatar::profile('user@domain.com');
 
 // Returns https://secure.gravatar.com/EMAIL_HASH.vcf
-Util::vcard('user@domain.com');
+Gravatar::vcard('user@domain.com');
 
 // Returns https://secure.gravatar.com/EMAIL_HASH.qr
-Util::qrCode('user@domain.com');
+Gravatar::qrCode('user@domain.com');
 ```
 
 You can also use the `SingleUrlBuilder` which accepts an email in its constructor:
@@ -97,13 +95,8 @@ $urlBuilder->qrCode();
 ## Testing
 
 ``` bash
-$ phpspec run
+$ composer test
 ```
-
-
-## Contributing
-
-Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
 
 
 ## Credits

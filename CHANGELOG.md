@@ -3,6 +3,4 @@
 
 ## Unreleased
 
-### Added
-
 - Initial release

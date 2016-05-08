@@ -3,7 +3,6 @@
 namespace spec\Gravatar;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 
 class SingleUrlBuilderSpec extends ObjectBehavior
 {
@@ -20,15 +19,16 @@ class SingleUrlBuilderSpec extends ObjectBehavior
     function it_is_initializable()
     {
         $this->shouldHaveType('Gravatar\SingleUrlBuilder');
-        $this->shouldHaveType('Gravatar\AbstractUrlBuilder');
     }
 
     function it_throws_an_exception_when_email_is_invalid()
     {
-        $this->shouldThrow('InvalidArgumentException')->during('__construct', ['invalid']);
+        $this->beConstructedWith('invalid');
+
+        $this->shouldThrow('InvalidArgumentException')->duringInstantiation();
     }
 
-    function it_sets_used_endpoint()
+    function it_configures_used_protocol()
     {
         $this->useHttps(false);
 

@@ -3,16 +3,15 @@
 namespace spec\Gravatar;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 
-class UtilSpec extends ObjectBehavior
+class StaticUrlBuilderSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Gravatar\Util');
+        $this->shouldHaveType('Gravatar\StaticUrlBuilder');
     }
 
-    function it_sets_used_endpoint()
+    function it_configures_used_protocol()
     {
         $this->useHttps(false);
 
