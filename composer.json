@@ -24,6 +24,11 @@
             "Gravatar\\": "src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "spec\\Gravatar\\": "spec/"
+        }
+    },
     "scripts": {
         "test": "vendor/bin/phpspec run",
         "test-ci": "vendor/bin/phpspec run -c phpspec.ci.yml"

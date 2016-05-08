@@ -25,36 +25,39 @@ class UrlBuilder extends BaseUrlBuilder
     /**
      * Returns a profile URL.
      *
-     * @param string $email
+     * @param string    $email
+     * @param bool|null $secure
      *
      * @return string
      */
-    public function profile($email)
+    public function profile($email, $secure = null)
     {
-        return $this->buildUrl($this->createEmailHash($email));
+        return $this->buildUrl($this->createEmailHash($email), compact('secure'));
     }
 
     /**
      * Returns a vCard URL.
      *
-     * @param string $email
+     * @param string    $email
+     * @param bool|null $secure
      *
      * @return string
      */
-    public function vcard($email)
+    public function vcard($email, $secure = null)
     {
-        return $this->profile($email).'.vcf';
+        return $this->profile($email, $secure).'.vcf';
     }
 
     /**
      * Returns a QR Code URL.
      *
      * @param string $email
+     * @param bool|null $secure
      *
      * @return string
      */
-    public function qrCode($email)
+    public function qrCode($email, $secure = null)
     {
-        return $this->profile($email).'.qr';
+        return $this->profile($email, $secure).'.qr';
     }
 }

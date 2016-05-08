@@ -40,30 +40,36 @@ class SingleUrlBuilder extends BaseUrlBuilder
     /**
      * Returns a profile URL.
      *
+     * @param bool|null $secure
+     *
      * @return string
      */
-    public function profile()
+    public function profile($secure = null)
     {
-        return $this->buildUrl($this->emailHash);
+        return $this->buildUrl($this->emailHash, compact('secure'));
     }
 
     /**
      * Returns a vCard URL.
      *
+     * @param bool|null $secure
+     *
      * @return string
      */
-    public function vcard()
+    public function vcard($secure = null)
     {
-        return $this->profile().'.vcf';
+        return $this->profile($secure).'.vcf';
     }
 
     /**
      * Returns a QR Code URL.
      *
+     * @param bool|null $secure
+     *
      * @return string
      */
-    public function qrCode()
+    public function qrCode($secure = null)
     {
-        return $this->profile().'.qr';
+        return $this->profile($secure).'.qr';
     }
 }

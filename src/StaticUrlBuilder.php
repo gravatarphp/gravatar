@@ -21,7 +21,7 @@ class StaticUrlBuilder
      */
     protected static function getUrlBuilder()
     {
-        if (!isset(static::$urlBuilder)) {
+        if (null === static::$urlBuilder) {
             static::$urlBuilder = new UrlBuilder();
         }
 
@@ -54,36 +54,39 @@ class StaticUrlBuilder
     /**
      * Returns a profile URL.
      *
-     * @param string $email
+     * @param string    $email
+     * @param bool|null $secure
      *
      * @return string
      */
-    public static function profile($email)
+    public static function profile($email, $secure = null)
     {
-        return static::getUrlBuilder()->profile($email);
+        return static::getUrlBuilder()->profile($email, $secure);
     }
 
     /**
      * Returns a vCard URL.
      *
-     * @param string $email
+     * @param string    $email
+     * @param bool|null $secure
      *
      * @return string
      */
-    public static function vcard($email)
+    public static function vcard($email, $secure = null)
     {
-        return static::getUrlBuilder()->vcard($email);
+        return static::getUrlBuilder()->vcard($email, $secure);
     }
 
     /**
      * Returns a QR Code URL.
      *
-     * @param string $email
+     * @param string    $email
+     * @param bool|null $secure
      *
      * @return string
      */
-    public static function qrCode($email)
+    public static function qrCode($email, $secure = null)
     {
-        return static::getUrlBuilder()->qrCode($email);
+        return static::getUrlBuilder()->qrCode($email, $secure);
     }
 }

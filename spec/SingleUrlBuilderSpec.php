@@ -40,9 +40,19 @@ class SingleUrlBuilderSpec extends ObjectBehavior
         $this->avatar()->shouldReturn(sprintf('https://secure.gravatar.com/avatar/%s', $this->hash));
     }
 
+    function it_allows_to_override_protocol_for_avatar_url()
+    {
+        $this->avatar(['secure' => false])->shouldStartWith('http://www.gravatar.com');
+    }
+
     function it_returns_a_profile_url()
     {
         $this->profile()->shouldReturn(sprintf('https://secure.gravatar.com/%s', $this->hash));
+    }
+
+    function it_allows_to_override_protocol_for_profile_url()
+    {
+        $this->profile(false)->shouldStartWith('http://www.gravatar.com');
     }
 
     function it_returns_a_vcard_url()
@@ -50,8 +60,18 @@ class SingleUrlBuilderSpec extends ObjectBehavior
         $this->vcard()->shouldReturn(sprintf('https://secure.gravatar.com/%s.%s', $this->hash, 'vcf'));
     }
 
+    function it_allows_to_override_protocol_for_vcard_url()
+    {
+        $this->vcard(false)->shouldStartWith('http://www.gravatar.com');
+    }
+
     function it_returns_a_qrcode_url()
     {
         $this->qrCode()->shouldReturn(sprintf('https://secure.gravatar.com/%s.%s', $this->hash, 'qr'));
+    }
+
+    function it_allows_to_override_protocol_for_qrcode_url()
+    {
+        $this->qrcode(false)->shouldStartWith('http://www.gravatar.com');
     }
 }

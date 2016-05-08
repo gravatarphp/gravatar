@@ -64,7 +64,15 @@ abstract class BaseUrlBuilder
      */
     protected function buildUrl($segment, array $params = [])
     {
-        $endpoint = $this->useHttps ? self::HTTPS_ENDPOINT : self::HTTP_ENDPOINT;
+        $useHttps = $this->useHttps;
+
+        if (isset($params['secure'])) {
+            $useHttps = (bool)$params['secure'];
+            unset($params['secure']);
+        }
+
+        $endpoint = $useHttps ? self::HTTPS_ENDPOINT : self::HTTP_ENDPOINT;
+
         $params = array_filter($params);
 
         $url = sprintf('%s/%s', $endpoint, $segment);

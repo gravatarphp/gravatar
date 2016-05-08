@@ -6,45 +6,15 @@ use PhpSpec\ObjectBehavior;
 
 class StaticUrlBuilderSpec extends ObjectBehavior
 {
+    use UrlBuilderBehavior;
+
     function it_is_initializable()
     {
         $this->shouldHaveType('Gravatar\StaticUrlBuilder');
     }
 
-    function it_configures_used_protocol()
+    function letgo()
     {
-        $this->useHttps(false);
-
-        $this->profile('user@domain.com')->shouldStartWith('http://');
-
         $this->useHttps(true);
-    }
-
-    function it_returns_an_avatar_url()
-    {
-        $email = 'user@domain.com';
-
-        $this->avatar($email)->shouldReturn(sprintf('https://secure.gravatar.com/avatar/%s', md5($email)));
-    }
-
-    function it_returns_a_profile_url()
-    {
-        $email = 'user@domain.com';
-
-        $this->profile($email)->shouldReturn(sprintf('https://secure.gravatar.com/%s', md5($email)));
-    }
-
-    function it_returns_a_vcard_url()
-    {
-        $email = 'user@domain.com';
-
-        $this->vcard($email)->shouldReturn(sprintf('https://secure.gravatar.com/%s.%s', md5($email), 'vcf'));
-    }
-
-    function it_returns_a_qrcode_url()
-    {
-        $email = 'user@domain.com';
-
-        $this->qrCode($email)->shouldReturn(sprintf('https://secure.gravatar.com/%s.%s', md5($email), 'qr'));
     }
 }
