@@ -11,6 +11,14 @@ trait UrlBuilderBehavior
         $this->avatar($this->email)->shouldReturn(sprintf('https://secure.gravatar.com/avatar/%s', md5($this->email)));
     }
 
+    function it_returns_an_avatar_url_with_parameters()
+    {
+        $this
+            ->avatar($this->email, ['s' => 500, 'r' => 'g'])
+            ->shouldReturn(sprintf('https://secure.gravatar.com/avatar/%s?s=500&r=g', md5($this->email)))
+        ;
+    }
+
     function it_allows_to_override_protocol_for_avatar_url()
     {
         $this->avatar($this->email, [], false)->shouldStartWith('http://www.gravatar.com');
