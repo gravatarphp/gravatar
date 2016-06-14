@@ -30,7 +30,7 @@ class SingleUrlBuilderSpec extends ObjectBehavior
 
     function it_configures_used_protocol()
     {
-        $this->useHttps(false);
+        $this->beConstructedWith('user@domain.com', false);
 
         $this->profile()->shouldStartWith('http://');
     }

@@ -29,16 +29,6 @@ abstract class BaseUrlBuilder
     }
 
     /**
-     * Sets the used connection endpoint.
-     *
-     * @param bool $useHttps
-     */
-    public function useHttps($useHttps)
-    {
-        $this->useHttps = (bool) $useHttps;
-    }
-
-    /**
      * Creates a hash from an email address.
      *
      * @param string $email

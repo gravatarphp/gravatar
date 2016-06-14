@@ -13,8 +13,12 @@ class StaticUrlBuilderSpec extends ObjectBehavior
         $this->shouldHaveType('Gravatar\StaticUrlBuilder');
     }
 
-    function letgo()
+    function it_configures_used_protocol()
     {
+        $this->useHttps(false);
+
+        $this->profile($this->email)->shouldStartWith('http://');
+
         $this->useHttps(true);
     }
 }

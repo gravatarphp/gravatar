@@ -6,13 +6,6 @@ trait UrlBuilderBehavior
 {
     private $email = 'user@domain.com';
 
-    function it_configures_used_protocol()
-    {
-        $this->useHttps(false);
-
-        $this->profile($this->email)->shouldStartWith('http://');
-    }
-
     function it_returns_an_avatar_url()
     {
         $this->avatar($this->email)->shouldReturn(sprintf('https://secure.gravatar.com/avatar/%s', md5($this->email)));

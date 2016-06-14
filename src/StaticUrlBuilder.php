@@ -35,7 +35,7 @@ class StaticUrlBuilder
      */
     public static function useHttps($useHttps)
     {
-        static::getUrlBuilder()->useHttps($useHttps);
+        static::$urlBuilder = new UrlBuilder($useHttps);
     }
 
     /**
