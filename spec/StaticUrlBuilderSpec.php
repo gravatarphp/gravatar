@@ -15,10 +15,20 @@ class StaticUrlBuilderSpec extends ObjectBehavior
 
     function it_configures_used_protocol()
     {
-        $this->useHttps(false);
+        $this->configure([], false);
 
         $this->profile($this->email)->shouldStartWith('http://');
+    }
 
-        $this->useHttps(true);
+    function it_accepts_default_params()
+    {
+        $this->configure(['s' => 500]);
+
+        $this->avatar($this->email)->shouldContain('?s=500');
+    }
+
+    function letgo()
+    {
+        $this->configure();
     }
 }

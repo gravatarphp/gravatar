@@ -30,9 +30,16 @@ class SingleUrlBuilderSpec extends ObjectBehavior
 
     function it_configures_used_protocol()
     {
-        $this->beConstructedWith('user@domain.com', false);
+        $this->beConstructedWith('user@domain.com', [], false);
 
         $this->profile()->shouldStartWith('http://');
+    }
+
+    function it_accepts_default_params()
+    {
+        $this->beConstructedWith('user@domain.com', ['s' => 500]);
+
+        $this->avatar()->shouldContain('?s=500');
     }
 
     function it_returns_an_avatar_url()

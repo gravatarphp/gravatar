@@ -16,13 +16,14 @@ class SingleUrlBuilder extends BaseUrlBuilder
 
     /**
      * @param string $email
+     * @param array  $defaultParams
      * @param bool   $secure
      */
-    public function __construct($email, $secure = true)
+    public function __construct($email, array $defaultParams = [], $secure = true)
     {
         $this->emailHash = $this->createEmailHash($email);
 
-        parent::__construct($secure);
+        parent::__construct($defaultParams, $secure);
     }
 
     /**
@@ -35,7 +36,7 @@ class SingleUrlBuilder extends BaseUrlBuilder
      */
     public function avatar(array $options = [], $secure = null)
     {
-        return $this->buildUrl('avatar/'.$this->emailHash, $options, $secure);
+        return $this->buildUrlWithParams('avatar/'.$this->emailHash, $options, $secure);
     }
 
     /**
@@ -47,7 +48,7 @@ class SingleUrlBuilder extends BaseUrlBuilder
      */
     public function profile($secure = null)
     {
-        return $this->buildUrl($this->emailHash, [], $secure);
+        return $this->buildUrl($this->emailHash, $secure);
     }
 
     /**

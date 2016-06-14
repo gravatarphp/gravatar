@@ -15,8 +15,15 @@ class UrlBuilderSpec extends ObjectBehavior
 
     function it_configures_used_protocol()
     {
-        $this->beConstructedWith(false);
+        $this->beConstructedWith([], false);
 
         $this->profile($this->email)->shouldStartWith('http://');
+    }
+
+    function it_accepts_default_params()
+    {
+        $this->beConstructedWith(['s' => 500]);
+
+        $this->avatar($this->email)->shouldContain('?s=500');
     }
 }

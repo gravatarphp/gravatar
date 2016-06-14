@@ -22,20 +22,21 @@ class StaticUrlBuilder
     protected static function getUrlBuilder()
     {
         if (null === static::$urlBuilder) {
-            static::$urlBuilder = new UrlBuilder();
+            static::configure();
         }
 
         return static::$urlBuilder;
     }
 
     /**
-     * Sets the used connection endpoint.
+     * Configures the underlying URL Builder.
      *
-     * @param bool $secure
+     * @param array $defaultParams
+     * @param bool  $secure
      */
-    public static function useHttps($secure)
+    public static function configure(array $defaultParams = [], $secure = true)
     {
-        static::$urlBuilder = new UrlBuilder($secure);
+        static::$urlBuilder = new UrlBuilder($defaultParams, $secure);
     }
 
     /**

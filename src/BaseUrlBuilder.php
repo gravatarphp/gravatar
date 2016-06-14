@@ -16,6 +16,11 @@ abstract class BaseUrlBuilder
     const HTTPS_ENDPOINT = 'https://secure.gravatar.com';
 
     /**
+     * @var array
+     */
+    protected $defaultParams = [];
+
+    /**
      * Whether to use HTTPS endpoint.
      *
      * @var bool
@@ -23,10 +28,12 @@ abstract class BaseUrlBuilder
     protected $secure;
 
     /**
-     * @param bool $secure
+     * @param array $defaultParams
+     * @param bool  $secure
      */
-    public function __construct($secure = true)
+    public function __construct(array $defaultParams = [], $secure = true)
     {
+        $this->defaultParams = array_filter($defaultParams);
         $this->secure = (bool) $secure;
     }
 
@@ -49,26 +56,37 @@ abstract class BaseUrlBuilder
     /**
      * Builds the URL based on the given parameters.
      *
-     * @param string    $segment
-     * @param array     $params
+     * @param string    $resource
      * @param bool|null $secure
      *
      * @return string
      */
-    protected function buildUrl($segment, array $params = [], $secure = null)
+    protected function buildUrl($resource, $secure = null)
     {
         $secure = isset($secure) ? (bool) $secure : $this->secure;
 
         $endpoint = $secure ? self::HTTPS_ENDPOINT : self::HTTP_ENDPOINT;
 
-        $params = array_filter($params);
+        return sprintf('%s/%s', $endpoint, $resource);
+    }
 
-        $url = sprintf('%s/%s', $endpoint, $segment);
+    /**
+     * Builds the URL based on the given parameters.
+     *
+     * @param string    $resource
+     * @param array     $params
+     * @param bool|null $secure
+     *
+     * @return string
+     */
+    protected function buildUrlWithParams($resource, array $params = [], $secure = null)
+    {
+        $params = array_merge($this->defaultParams, array_filter($params));
 
         if (!empty($params)) {
-            $url .= '?'.http_build_query($params);
+            $resource .= '?'.http_build_query($params);
         }
 
-        return $url;
+        return $this->buildUrl($resource, $secure);
     }
 }
