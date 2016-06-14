@@ -67,7 +67,7 @@ abstract class BaseUrlBuilder
         $useHttps = $this->useHttps;
 
         if (isset($params['secure'])) {
-            $useHttps = (bool)$params['secure'];
+            $useHttps = (bool) $params['secure'];
             unset($params['secure']);
         }
 

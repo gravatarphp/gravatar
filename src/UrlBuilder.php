@@ -51,7 +51,7 @@ class UrlBuilder extends BaseUrlBuilder
     /**
      * Returns a QR Code URL.
      *
-     * @param string $email
+     * @param string    $email
      * @param bool|null $secure
      *
      * @return string
