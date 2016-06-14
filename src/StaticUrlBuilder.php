@@ -31,11 +31,11 @@ class StaticUrlBuilder
     /**
      * Sets the used connection endpoint.
      *
-     * @param bool $useHttps
+     * @param bool $secure
      */
-    public static function useHttps($useHttps)
+    public static function useHttps($secure)
     {
-        static::$urlBuilder = new UrlBuilder($useHttps);
+        static::$urlBuilder = new UrlBuilder($secure);
     }
 
     /**

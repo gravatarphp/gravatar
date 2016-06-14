@@ -16,13 +16,13 @@ class SingleUrlBuilder extends BaseUrlBuilder
 
     /**
      * @param string $email
-     * @param bool   $useHttps
+     * @param bool   $secure
      */
-    public function __construct($email, $useHttps = true)
+    public function __construct($email, $secure = true)
     {
         $this->emailHash = $this->createEmailHash($email);
 
-        parent::__construct($useHttps);
+        parent::__construct($secure);
     }
 
     /**

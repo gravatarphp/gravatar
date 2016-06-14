@@ -16,16 +16,18 @@ abstract class BaseUrlBuilder
     const HTTPS_ENDPOINT = 'https://secure.gravatar.com';
 
     /**
+     * Whether to use HTTPS endpoint.
+     *
      * @var bool
      */
-    protected $useHttps;
+    protected $secure;
 
     /**
-     * @param bool $useHttps
+     * @param bool $secure
      */
-    public function __construct($useHttps = true)
+    public function __construct($secure = true)
     {
-        $this->useHttps = (bool) $useHttps;
+        $this->secure = (bool) $secure;
     }
 
     /**
@@ -55,9 +57,9 @@ abstract class BaseUrlBuilder
      */
     protected function buildUrl($segment, array $params = [], $secure = null)
     {
-        $useHttps = isset($secure) ? (bool) $secure : $this->useHttps;
+        $secure = isset($secure) ? (bool) $secure : $this->secure;
 
-        $endpoint = $useHttps ? self::HTTPS_ENDPOINT : self::HTTP_ENDPOINT;
+        $endpoint = $secure ? self::HTTPS_ENDPOINT : self::HTTP_ENDPOINT;
 
         $params = array_filter($params);
 
