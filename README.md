@@ -43,54 +43,7 @@ $urlBuilder->qrCode('user@domain.com');
 ```
 
 
-Or use the static version.
-
-``` php
-use Gravatar\StaticUrlBuilder as Gravatar;
-
-// Optional
-Gravatar::configure([], true);
-
-// Returns https://secure.gravatar.com/avatar/EMAIL_HASH
-Gravatar::avatar('user@domain.com');
-
-// Returns https://secure.gravatar.com/EMAIL_HASH
-Gravatar::profile('user@domain.com');
-
-// Returns https://secure.gravatar.com/EMAIL_HASH.vcf
-Gravatar::vcard('user@domain.com');
-
-// Returns https://secure.gravatar.com/EMAIL_HASH.qr
-Gravatar::qrCode('user@domain.com');
-```
-
-
-You can also use the `SingleUrlBuilder` which accepts an email in its constructor.
-
-``` php
-use Gravatar\SingleUrlBuilder;
-
-// Email
-// No default parameters (optional)
-// Use HTTPS (optional)
-$urlBuilder = new SingleUrlBuilder('user@domain.com', [], true);
-
-// Returns https://secure.gravatar.com/avatar/EMAIL_HASH
-$urlBuilder->avatar();
-
-// Returns https://secure.gravatar.com/EMAIL_HASH
-$urlBuilder->profile();
-
-// Returns https://secure.gravatar.com/EMAIL_HASH.vcf
-$urlBuilder->vcard();
-
-// Returns https://secure.gravatar.com/EMAIL_HASH.qr
-$urlBuilder->qrCode();
-```
-
-
-In all three URL Bulders you can override the globally used protocol (HTTP, HTTPS) by setting the last parameter to
-true/false.
+You can override the globally used protocol (HTTP, HTTPS) by setting the last parameter to true/false.
 
 ``` php
 use Gravatar\UrlBuilder;
@@ -111,33 +64,15 @@ $urlBuilder->qrCode('user@domain.com', false);
 ```
 
 
-Last, but not least, you can pass default parameters to the builders...
+Last, but not least, you can pass default options to the builder and use them to generate avatar URLs.
 
 ``` php
 use Gravatar\UrlBuilder;
-use Gravatar\StaticUrlBuilder as Gravatar;
-use Gravatar\SingleUrlBuilder;
 
 $urlBuilder = new UrlBuilder([
     'size' => 500,
 ]);
 
-$urlBuilder = new SingleUrlBuilder(
-    'user@domain.com',
-    [
-        'size' => 500,
-    ]
-);
-
-Gravatar::configure([
-    'size' => 500,
-]);
-```
-
-
-...and use them to generate avatar URLs.
-
-``` php
 // Returns https://secure.gravatar.com/avatar/EMAIL_HASH?size=500&r=g
 $urlBuilder->avatar('user@domain.com', ['r' => 'g']);
 ```
