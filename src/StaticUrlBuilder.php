@@ -41,14 +41,15 @@ class StaticUrlBuilder
     /**
      * Returns an Avatar URL.
      *
-     * @param string $email
-     * @param array  $options
+     * @param string    $email
+     * @param array     $options
+     * @param bool|null $secure
      *
      * @return string
      */
-    public static function avatar($email, array $options = [])
+    public static function avatar($email, array $options = [], $secure = null)
     {
-        return static::getUrlBuilder()->avatar($email, $options);
+        return static::getUrlBuilder()->avatar($email, $options, $secure);
     }
 
     /**

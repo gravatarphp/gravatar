@@ -20,7 +20,7 @@ trait UrlBuilderBehavior
 
     function it_allows_to_override_protocol_for_avatar_url()
     {
-        $this->avatar($this->email, ['secure' => false])->shouldStartWith('http://www.gravatar.com');
+        $this->avatar($this->email, [], false)->shouldStartWith('http://www.gravatar.com');
     }
 
     function it_throws_an_exception_when_avatar_email_is_invalid()

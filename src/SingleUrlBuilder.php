@@ -28,13 +28,14 @@ class SingleUrlBuilder extends BaseUrlBuilder
     /**
      * Returns an Avatar URL.
      *
-     * @param array $options
+     * @param array     $options
+     * @param bool|null $secure
      *
      * @return string
      */
-    public function avatar(array $options = [])
+    public function avatar(array $options = [], $secure = null)
     {
-        return $this->buildUrl('avatar/'.$this->emailHash, $options);
+        return $this->buildUrl('avatar/'.$this->emailHash, $options, $secure);
     }
 
     /**
@@ -46,7 +47,7 @@ class SingleUrlBuilder extends BaseUrlBuilder
      */
     public function profile($secure = null)
     {
-        return $this->buildUrl($this->emailHash, compact('secure'));
+        return $this->buildUrl($this->emailHash, [], $secure);
     }
 
     /**

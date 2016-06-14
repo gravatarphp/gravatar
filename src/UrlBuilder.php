@@ -12,14 +12,15 @@ class UrlBuilder extends BaseUrlBuilder
     /**
      * Returns an Avatar URL.
      *
-     * @param string $email
-     * @param array  $options
+     * @param string    $email
+     * @param array     $options
+     * @param bool|null $secure
      *
      * @return string
      */
-    public function avatar($email, array $options = [])
+    public function avatar($email, array $options = [], $secure = null)
     {
-        return $this->buildUrl('avatar/'.$this->createEmailHash($email), $options);
+        return $this->buildUrl('avatar/'.$this->createEmailHash($email), $options, $secure);
     }
 
     /**
@@ -32,7 +33,7 @@ class UrlBuilder extends BaseUrlBuilder
      */
     public function profile($email, $secure = null)
     {
-        return $this->buildUrl($this->createEmailHash($email), compact('secure'));
+        return $this->buildUrl($this->createEmailHash($email), [], $secure);
     }
 
     /**

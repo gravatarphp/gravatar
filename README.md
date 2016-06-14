@@ -89,10 +89,8 @@ $urlBuilder->vcard();
 $urlBuilder->qrCode();
 ```
 
-In all three URL Bulders you can override the globally used protocol (HTTP, HTTPS):
-
-- the `avatar` method always accepts an options array as the last argument, pass an array with `secure` set to true/false
-- that `profile`, `vcard`, `qrCode` methods accept a `secure` argument as the last one with true/false value
+In all three URL Bulders you can override the globally used protocol (HTTP, HTTPS) by setting the last parameter to
+true/false.
 
 
 **Note:** Profile, vCard and QR Code requests will only work with the primary email address. This is a limitation of Gravatar. However the builder won't complain, since it doesn't know if it is your primary address or not. For more tips and details check the [Gravatar documentation](http://gravatar.com/site/implement/).

@@ -42,7 +42,7 @@ class SingleUrlBuilderSpec extends ObjectBehavior
 
     function it_allows_to_override_protocol_for_avatar_url()
     {
-        $this->avatar(['secure' => false])->shouldStartWith('http://www.gravatar.com');
+        $this->avatar([], false)->shouldStartWith('http://www.gravatar.com');
     }
 
     function it_returns_a_profile_url()

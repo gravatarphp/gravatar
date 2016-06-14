@@ -57,19 +57,15 @@ abstract class BaseUrlBuilder
     /**
      * Builds the URL based on the given parameters.
      *
-     * @param string $segment
-     * @param array  $params
+     * @param string    $segment
+     * @param array     $params
+     * @param bool|null $secure
      *
      * @return string
      */
-    protected function buildUrl($segment, array $params = [])
+    protected function buildUrl($segment, array $params = [], $secure = null)
     {
-        $useHttps = $this->useHttps;
-
-        if (isset($params['secure'])) {
-            $useHttps = (bool) $params['secure'];
-            unset($params['secure']);
-        }
+        $useHttps = isset($secure) ? (bool) $secure : $this->useHttps;
 
         $endpoint = $useHttps ? self::HTTPS_ENDPOINT : self::HTTP_ENDPOINT;
 
