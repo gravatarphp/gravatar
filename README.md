@@ -21,60 +21,60 @@ $ composer require gravatarphp/gravatar
 
 ## Usage
 
-Create a `UrlBuilder` instance and use it for creating URLs.
+Create a `Gravatar` instance and use it for creating URLs.
 
 ``` php
-use Gravatar\UrlBuilder;
+use Gravatar\Gravatar;
 
 // Defaults: no default parameter, use HTTPS
-$urlBuilder = new UrlBuilder([], true);
+$gravatar = new Gravatar([], true);
 
 // Returns https://secure.gravatar.com/avatar/EMAIL_HASH
-$urlBuilder->avatar('user@domain.com');
+$gravatar->avatar('user@domain.com');
 
 // Returns https://secure.gravatar.com/EMAIL_HASH
-$urlBuilder->profile('user@domain.com');
+$gravatar->profile('user@domain.com');
 
 // Returns https://secure.gravatar.com/EMAIL_HASH.vcf
-$urlBuilder->vcard('user@domain.com');
+$gravatar->vcard('user@domain.com');
 
 // Returns https://secure.gravatar.com/EMAIL_HASH.qr
-$urlBuilder->qrCode('user@domain.com');
+$gravatar->qrCode('user@domain.com');
 ```
 
 
 You can override the globally used protocol (HTTP, HTTPS) by setting the last parameter to true/false.
 
 ``` php
-use Gravatar\UrlBuilder;
+use Gravatar\Gravatar;
 
-$urlBuilder = new UrlBuilder();
+$gravatar = new Gravatar();
 
 // Returns http://www.gravatar.com/avatar/EMAIL_HASH
-$urlBuilder->avatar('user@domain.com', [], false);
+$gravatar->avatar('user@domain.com', [], false);
 
 // Returns http://www.gravatar.com/EMAIL_HASH
-$urlBuilder->profile('user@domain.com', false);
+$gravatar->profile('user@domain.com', false);
 
 // Returns http://www.gravatar.com/EMAIL_HASH.vcf
-$urlBuilder->vcard('user@domain.com', false);
+$gravatar->vcard('user@domain.com', false);
 
 // Returns http://www.gravatar.com/EMAIL_HASH.qr
-$urlBuilder->qrCode('user@domain.com', false);
+$gravatar->qrCode('user@domain.com', false);
 ```
 
 
 Last, but not least, you can pass default options to the builder and use them to generate avatar URLs.
 
 ``` php
-use Gravatar\UrlBuilder;
+use Gravatar\Gravatar;
 
-$urlBuilder = new UrlBuilder([
+$gravatar = new Gravatar([
     'size' => 500,
 ]);
 
 // Returns https://secure.gravatar.com/avatar/EMAIL_HASH?size=500&r=g
-$urlBuilder->avatar('user@domain.com', ['r' => 'g']);
+$gravatar->avatar('user@domain.com', ['r' => 'g']);
 ```
 
 

@@ -7,7 +7,7 @@ namespace Gravatar;
  *
  * @author Márk Sági-Kazár <mark.sagikazar@gmail.com>
  */
-final class UrlBuilder
+final class Gravatar
 {
     /**
      * Gravatar endpoints.
