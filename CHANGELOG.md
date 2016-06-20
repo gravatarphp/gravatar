@@ -3,6 +3,10 @@
 
 ## UNRELEASED
 
+### Changed
+
+- Renamed UrlBuilder to Gravatar
+
 ### Removed
 
 - Single URL builder

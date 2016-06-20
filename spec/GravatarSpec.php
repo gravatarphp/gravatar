@@ -4,13 +4,13 @@ namespace spec\Gravatar;
 
 use PhpSpec\ObjectBehavior;
 
-class UrlBuilderSpec extends ObjectBehavior
+class GravatarSpec extends ObjectBehavior
 {
     private $email = 'user@domain.com';
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Gravatar\UrlBuilder');
+        $this->shouldHaveType('Gravatar\Gravatar');
     }
 
     function it_configures_used_protocol()
