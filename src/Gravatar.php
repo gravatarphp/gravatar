@@ -18,14 +18,14 @@ final class Gravatar
     /**
      * @var array
      */
-    protected $defaults = [];
+    private $defaults = [];
 
     /**
      * Whether to use HTTPS endpoint.
      *
      * @var bool
      */
-    protected $secure;
+    private $secure;
 
     /**
      * @param array $defaults
