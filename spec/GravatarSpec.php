@@ -2,6 +2,7 @@
 
 namespace spec\Gravatar;
 
+use Gravatar\Gravatar;
 use PhpSpec\ObjectBehavior;
 
 class GravatarSpec extends ObjectBehavior
@@ -10,7 +11,7 @@ class GravatarSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Gravatar\Gravatar');
+        $this->shouldHaveType(Gravatar::class);
     }
 
     function it_configures_used_protocol()
