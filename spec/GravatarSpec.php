@@ -52,8 +52,7 @@ class GravatarSpec extends ObjectBehavior
         $defaultImageUrl = 'http://www.foo.com/bar.jpg';
         $this
             ->avatar($this->email, ['default' => $defaultImageUrl])
-            ->shouldReturn(sprintf('https://secure.gravatar.com/avatar/%s?default=%s', md5($this->email), urlencode($defaultImageUrl)))
-        ;
+            ->shouldReturn(sprintf('https://secure.gravatar.com/avatar/%s?default=%s', md5($this->email), urlencode($defaultImageUrl)));
     }
 
     function it_allows_to_override_protocol_for_avatar_url()
@@ -64,66 +63,56 @@ class GravatarSpec extends ObjectBehavior
     function it_returns_an_avatar_without_a_size_option_under_the_minimum()
     {
         $this
-            ->avatar($this->email, ['s' => -1])
-            ->shouldReturn(sprintf('https://secure.gravatar.com/avatar/%s', md5($this->email)))
-        ;
+            ->avatar($this->email, ['s' => -1], true, true)
+            ->shouldReturn(sprintf('https://secure.gravatar.com/avatar/%s', md5($this->email)));
 
         $this
-            ->avatar($this->email, ['size' => -1000])
-            ->shouldReturn(sprintf('https://secure.gravatar.com/avatar/%s', md5($this->email)))
-        ;
+            ->avatar($this->email, ['size' => -1000], true, true)
+            ->shouldReturn(sprintf('https://secure.gravatar.com/avatar/%s', md5($this->email)));
     }
 
     function it_returns_an_avatar_url_without_a_size_option_over_the_maxmum()
     {
         $this
-            ->avatar($this->email, ['s' => 9001])
-            ->shouldReturn(sprintf('https://secure.gravatar.com/avatar/%s', md5($this->email)))
-        ;
+            ->avatar($this->email, ['s' => 9001], true, true)
+            ->shouldReturn(sprintf('https://secure.gravatar.com/avatar/%s', md5($this->email)));
 
         $this
-            ->avatar($this->email, ['size' => 9001])
-            ->shouldReturn(sprintf('https://secure.gravatar.com/avatar/%s', md5($this->email)))
-        ;
+            ->avatar($this->email, ['size' => 9001], true, true)
+            ->shouldReturn(sprintf('https://secure.gravatar.com/avatar/%s', md5($this->email)));
     }
 
     function it_returns_an_avatar_url_without_an_invalid_default_image_option()
     {
         $this
-            ->avatar($this->email, ['d' => 'foobar'])
-            ->shouldReturn(sprintf('https://secure.gravatar.com/avatar/%s', md5($this->email)))
-        ;
+            ->avatar($this->email, ['d' => 'foobar'], true, true)
+            ->shouldReturn(sprintf('https://secure.gravatar.com/avatar/%s', md5($this->email)));
 
         $this
-            ->avatar($this->email, ['default' => 'foobar'])
-            ->shouldReturn(sprintf('https://secure.gravatar.com/avatar/%s', md5($this->email)))
-        ;
+            ->avatar($this->email, ['default' => 'foobar'], true, true)
+            ->shouldReturn(sprintf('https://secure.gravatar.com/avatar/%s', md5($this->email)));
     }
 
     function it_returns_an_avatar_url_without_an_invalid_force_default_option()
     {
         $this
-            ->avatar($this->email, ['f' => 'foobar'])
-            ->shouldReturn(sprintf('https://secure.gravatar.com/avatar/%s', md5($this->email)))
-        ;
+            ->avatar($this->email, ['f' => 'foobar'], true, true)
+            ->shouldReturn(sprintf('https://secure.gravatar.com/avatar/%s', md5($this->email)));
 
         $this
-            ->avatar($this->email, ['forcedefault' => 'foobar'])
-            ->shouldReturn(sprintf('https://secure.gravatar.com/avatar/%s', md5($this->email)))
-        ;
+            ->avatar($this->email, ['forcedefault' => 'foobar'], true, true)
+            ->shouldReturn(sprintf('https://secure.gravatar.com/avatar/%s', md5($this->email)));
     }
 
     function it_returns_an_avatar_url_without_an_invalid_rating_option()
     {
         $this
-            ->avatar($this->email, ['r' => 'foobar'])
-            ->shouldReturn(sprintf('https://secure.gravatar.com/avatar/%s', md5($this->email)))
-        ;
+            ->avatar($this->email, ['r' => 'foobar'], true, true)
+            ->shouldReturn(sprintf('https://secure.gravatar.com/avatar/%s', md5($this->email)));
 
         $this
-            ->avatar($this->email, ['rating' => 'foobar'])
-            ->shouldReturn(sprintf('https://secure.gravatar.com/avatar/%s', md5($this->email)))
-        ;
+            ->avatar($this->email, ['rating' => 'foobar'], true, true)
+            ->shouldReturn(sprintf('https://secure.gravatar.com/avatar/%s', md5($this->email)));
     }
 
     function it_throws_an_exception_when_avatar_email_is_invalid()

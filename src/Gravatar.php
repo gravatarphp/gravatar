@@ -71,10 +71,6 @@ final class Gravatar
      */
     private $secure;
 
-    /**
-     * @param array $defaults
-     * @param bool $secure
-     */
     public function __construct(array $defaults = [], bool $secure = true)
     {
         $this->defaults = array_filter($defaults);
@@ -83,16 +79,16 @@ final class Gravatar
 
     /**
      * Returns an Avatar URL.
-     *
-     * @param string $email
-     * @param array $options
-     * @param bool|null $secure
-     * @return string
      */
-    public function avatar(string $email, array $options = [], bool $secure = null): string
+    public function avatar(string $email, array $options = [], bool $secure = null, bool $validateOptions = false): string
     {
         $url = 'avatar/'.$this->createEmailHash($email);
-        $options = $this->buildOptions(array_merge($this->defaults, array_filter($options)));
+
+        $options = array_merge($this->defaults, array_filter($options));
+
+        if ($validateOptions) {
+            $options = $this->validateOptions($options);
+        }
 
         if (!empty($options)) {
             $url .= '?'.http_build_query($options);
@@ -103,10 +99,6 @@ final class Gravatar
 
     /**
      * Returns a profile URL.
-     *
-     * @param string $email
-     * @param bool|null $secure
-     * @return string
      */
     public function profile(string $email, bool $secure = null): string
     {
@@ -115,10 +107,6 @@ final class Gravatar
 
     /**
      * Returns a vCard URL.
-     *
-     * @param string $email
-     * @param bool|null $secure
-     * @return string
      */
     public function vcard(string $email, bool $secure = null): string
     {
@@ -127,10 +115,6 @@ final class Gravatar
 
     /**
      * Returns a QR Code URL.
-     *
-     * @param string $email
-     * @param bool|null $secure
-     * @return string
      */
     public function qrCode(string $email, bool $secure = null): string
     {
@@ -139,9 +123,6 @@ final class Gravatar
 
     /**
      * Creates a hash from an email address.
-     *
-     * @param string $email
-     * @return string
      */
     private function createEmailHash(string $email): string
     {
@@ -152,7 +133,7 @@ final class Gravatar
         return md5(strtolower(trim($email)));
     }
 
-    private function buildOptions(array $options): array
+    private function validateOptions(array $options): array
     {
         // Image size
         if (array_key_exists('s', $options)) {
@@ -227,10 +208,6 @@ final class Gravatar
 
     /**
      * Builds the URL based on the given parameters.
-     *
-     * @param string $resource
-     * @param bool|null $secure
-     * @return string
      */
     private function buildUrl(string $resource, ?bool $secure): string
     {
