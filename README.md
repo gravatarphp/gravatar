@@ -32,6 +32,11 @@ $gravatar = new Gravatar([], true);
 // Returns https://secure.gravatar.com/avatar/EMAIL_HASH
 $gravatar->avatar('user@domain.com');
 
+// Returns https://secure.gravatar.com/avatar/EMAIL_HASH
+// The fourth parameter enables validation and will prevent the
+// size parameter from being added to the URL generated.
+$gravatar->avatar('user@domain.com', ['s' => 9001], true, true);
+
 // Returns https://secure.gravatar.com/EMAIL_HASH
 $gravatar->profile('user@domain.com');
 
@@ -79,7 +84,7 @@ $gravatar->avatar('user@domain.com', ['r' => 'g']);
 
 ## Parameters
 
-If you pass any of the following parameters, their values will be checked against the allowed values defined in the [Gravatar documentation](http://gravatar.com/site/implement/):
+If you pass any of the following parameters and turn validation on (fourth parameter in the `avatar()` method), their values will be checked against the allowed values defined in the [Gravatar documentation](http://gravatar.com/site/implement/):
 
 * `s`, `size` -- The image size
 * `d`, `default` -- The default image to display if there is no matching Gravatar
