@@ -11,13 +11,10 @@
         }
     ],
     "require": {
-        "php": ">=5.4"
+        "php": "^7.1"
     },
     "require-dev": {
-        "phpspec/phpspec": "^2.5",
-        "henrikbjorn/phpspec-code-coverage" : "^2.0",
-        "sllh/php-cs-fixer-styleci-bridge": "^2.0",
-        "friendsofphp/php-cs-fixer": "^1.11"
+        "phpspec/phpspec": "^4.1"
     },
     "autoload": {
         "psr-4": {
@@ -31,11 +28,13 @@
     },
     "scripts": {
         "test": "vendor/bin/phpspec run",
-        "test-ci": "vendor/bin/phpspec run -c phpspec.ci.yml"
+        "test-ci": "vendor/bin/phpspec run"
     },
     "extra": {
         "branch-alias": {
             "dev-master": "1.0-dev"
         }
-    }
+    },
+    "prefer-stable": true,
+    "minimum-stability": "dev"
 }
