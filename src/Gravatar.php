@@ -38,7 +38,7 @@ final class Gravatar
     /**
      * Returns an Avatar URL.
      */
-    public function avatar(string $email, array $options = [], bool $secure = null): string
+    public function avatar(string $email, array $options = [], ?bool $secure = null): string
     {
         $url = 'avatar/'.$this->createEmailHash($email);
         $options = array_merge($this->defaults, array_filter($options));
@@ -53,7 +53,7 @@ final class Gravatar
     /**
      * Returns a profile URL.
      */
-    public function profile(string $email, bool $secure = null): string
+    public function profile(string $email, ?bool $secure = null): string
     {
         return $this->buildUrl($this->createEmailHash($email), $secure);
     }
@@ -61,7 +61,7 @@ final class Gravatar
     /**
      * Returns a vCard URL.
      */
-    public function vcard(string $email, bool $secure = null): string
+    public function vcard(string $email, ?bool $secure = null): string
     {
         return $this->profile($email, $secure).'.vcf';
     }
@@ -69,7 +69,7 @@ final class Gravatar
     /**
      * Returns a QR Code URL.
      */
-    public function qrCode(string $email, bool $secure = null): string
+    public function qrCode(string $email, ?bool $secure = null): string
     {
         return $this->profile($email, $secure).'.qr';
     }
