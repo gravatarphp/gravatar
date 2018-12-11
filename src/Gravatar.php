@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Gravatar;
 
 /**
@@ -12,8 +14,8 @@ final class Gravatar
     /**
      * Gravatar endpoints.
      */
-    const HTTP_ENDPOINT = 'http://www.gravatar.com';
-    const HTTPS_ENDPOINT = 'https://secure.gravatar.com';
+    private const HTTP_ENDPOINT = 'http://www.gravatar.com';
+    private const HTTPS_ENDPOINT = 'https://secure.gravatar.com';
 
     /**
      * @var array
@@ -27,26 +29,16 @@ final class Gravatar
      */
     private $secure;
 
-    /**
-     * @param array $defaults
-     * @param bool  $secure
-     */
-    public function __construct(array $defaults = [], $secure = true)
+    public function __construct(array $defaults = [], bool $secure = true)
     {
         $this->defaults = array_filter($defaults);
-        $this->secure = (bool) $secure;
+        $this->secure = $secure;
     }
 
     /**
      * Returns an Avatar URL.
-     *
-     * @param string    $email
-     * @param array     $options
-     * @param bool|null $secure
-     *
-     * @return string
      */
-    public function avatar($email, array $options = [], $secure = null)
+    public function avatar(string $email, array $options = [], ?bool $secure = null): string
     {
         $url = 'avatar/'.$this->createEmailHash($email);
         $options = array_merge($this->defaults, array_filter($options));
@@ -60,51 +52,32 @@ final class Gravatar
 
     /**
      * Returns a profile URL.
-     *
-     * @param string    $email
-     * @param bool|null $secure
-     *
-     * @return string
      */
-    public function profile($email, $secure = null)
+    public function profile(string $email, ?bool $secure = null): string
     {
         return $this->buildUrl($this->createEmailHash($email), $secure);
     }
 
     /**
      * Returns a vCard URL.
-     *
-     * @param string    $email
-     * @param bool|null $secure
-     *
-     * @return string
      */
-    public function vcard($email, $secure = null)
+    public function vcard(string $email, ?bool $secure = null): string
     {
         return $this->profile($email, $secure).'.vcf';
     }
 
     /**
      * Returns a QR Code URL.
-     *
-     * @param string    $email
-     * @param bool|null $secure
-     *
-     * @return string
      */
-    public function qrCode($email, $secure = null)
+    public function qrCode(string $email, ?bool $secure = null): string
     {
         return $this->profile($email, $secure).'.qr';
     }
 
     /**
      * Creates a hash from an email address.
-     *
-     * @param string $email
-     *
-     * @return string
      */
-    private function createEmailHash($email)
+    private function createEmailHash(string $email): string
     {
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             throw new \InvalidArgumentException('Invalid email address');
@@ -115,13 +88,8 @@ final class Gravatar
 
     /**
      * Builds the URL based on the given parameters.
-     *
-     * @param string    $resource
-     * @param bool|null $secure
-     *
-     * @return string
      */
-    private function buildUrl($resource, $secure = null)
+    private function buildUrl(string $resource, ?bool $secure): string
     {
         $secure = isset($secure) ? (bool) $secure : $this->secure;
 
