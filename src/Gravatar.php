@@ -87,7 +87,7 @@ final class Gravatar
         $options = array_merge($this->defaults, array_filter($options));
 
         if ($validateOptions) {
-            $options = $this->validateOptions($options);
+            $this->validateOptions($options);
         }
 
         if (!empty($options)) {
@@ -139,16 +139,24 @@ final class Gravatar
         if (array_key_exists('s', $options)) {
             $size = filter_var($options['s'], FILTER_VALIDATE_INT);
 
-            if ($size === false || $size < self::MINIMUM_IMAGE_SIZE || $size > self::MAXIMUM_IMAGE_SIZE) {
-                unset($options['s']);
+            if ($size === false) {
+                throw new \InvalidArgumentException('The size parameter ' . $options['s'] . ' is not an integer.');
+            }
+
+            if ($size < self::MINIMUM_IMAGE_SIZE || $size > self::MAXIMUM_IMAGE_SIZE) {
+                throw new \InvalidArgumentException('The parameter ' . $options['s'] . ' is outside the allowed range of ' . self::MINIMUM_IMAGE_SIZE . ' to ' . self::MAXIMUM_IMAGE_SIZE . '.');
             }
         }
 
         if (array_key_exists('size', $options)) {
             $size = filter_var($options['size'], FILTER_VALIDATE_INT);
 
-            if ($size === false || $size < self::MINIMUM_IMAGE_SIZE || $size > self::MAXIMUM_IMAGE_SIZE) {
-                unset($options['size']);
+            if ($size === false) {
+                throw new \InvalidArgumentException('The size parameter ' . $options['size'] . ' is not an integer.');
+            }
+
+            if ($size < self::MINIMUM_IMAGE_SIZE || $size > self::MAXIMUM_IMAGE_SIZE) {
+                throw new \InvalidArgumentException('The size parameter ' . $options['size'] . ' is outside the allowed range of ' . self::MINIMUM_IMAGE_SIZE . ' to ' . self::MAXIMUM_IMAGE_SIZE . '.');
             }
         }
 
@@ -157,7 +165,7 @@ final class Gravatar
             $defaultImage = $options['d'];
 
             if (filter_var($defaultImage, FILTER_VALIDATE_URL) === false && !in_array(strtolower($defaultImage), self::DEFAULT_IMAGE_KEYWORDS)) {
-                unset($options['d']);
+                throw new \InvalidArgumentException('The default image parameter ' . $options['d'] . ' is not a URL or one of the allowed image keywords.');
             }
         }
 
@@ -165,7 +173,7 @@ final class Gravatar
             $defaultImage = $options['default'];
 
             if (filter_var($defaultImage, FILTER_VALIDATE_URL) === false && !in_array(strtolower($defaultImage), self::DEFAULT_IMAGE_KEYWORDS)) {
-                unset($options['default']);
+                throw new \InvalidArgumentException('The default image parameter ' . $options['default'] . ' is not a URL or one of the allowed image keywords.');
             }
         }
 
@@ -174,7 +182,7 @@ final class Gravatar
             $forceDefault = $options['f'];
 
             if ($forceDefault !== 'y') {
-                unset($options['f']);
+                throw new \InvalidArgumentException('The force default parameter ' . $options['f'] . ' is invalid.');
             }
         }
 
@@ -182,7 +190,7 @@ final class Gravatar
             $forceDefault = $options['forcedefault'];
 
             if ($forceDefault !== 'y') {
-                unset($options['forcedefault']);
+                throw new \InvalidArgumentException('The force default parameter ' . $options['forcedefault'] . ' is invalid.');
             }
         }
 
@@ -191,7 +199,7 @@ final class Gravatar
             $rating = strtolower($options['r']);
 
             if (!in_array($rating, self::IMAGE_RATINGS)) {
-                unset($options['r']);
+                throw new \InvalidArgumentException('The rating parameter ' . $options['r'] . ' is invalid.');
             }
         }
 
@@ -199,7 +207,7 @@ final class Gravatar
             $rating = strtolower($options['rating']);
 
             if (!in_array($rating, self::IMAGE_RATINGS)) {
-                unset($options['rating']);
+                throw new \InvalidArgumentException('The rating parameter ' . $options['rating'] . ' is invalid.');
             }
         }
 

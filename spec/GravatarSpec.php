@@ -60,59 +60,59 @@ class GravatarSpec extends ObjectBehavior
         $this->avatar($this->email, [], false)->shouldStartWith('http://www.gravatar.com');
     }
 
-    function it_returns_an_avatar_without_a_size_option_under_the_minimum()
+    function it_throws_an_exception_for_a_size_option_under_the_minimum()
     {
         $this
-            ->avatar($this->email, ['s' => -1], true, true)
-            ->shouldReturn(sprintf('https://secure.gravatar.com/avatar/%s', md5($this->email)));
+            ->shouldThrow('\InvalidArgumentException')
+            ->during('avatar', [$this->email, ['s' => -1], true, true]);
 
         $this
-            ->avatar($this->email, ['size' => -1000], true, true)
-            ->shouldReturn(sprintf('https://secure.gravatar.com/avatar/%s', md5($this->email)));
+            ->shouldThrow('\InvalidArgumentException')
+            ->during('avatar', [$this->email, ['size' => -1000], true, true]);
     }
 
-    function it_returns_an_avatar_url_without_a_size_option_over_the_maxmum()
+    function it_throws_an_exception_for_a_size_option_over_the_maxmum()
     {
         $this
-            ->avatar($this->email, ['s' => 9001], true, true)
-            ->shouldReturn(sprintf('https://secure.gravatar.com/avatar/%s', md5($this->email)));
+            ->shouldThrow('\InvalidArgumentException')
+            ->during('avatar', [$this->email, ['s' => 9001], true, true]);
 
         $this
-            ->avatar($this->email, ['size' => 9001], true, true)
-            ->shouldReturn(sprintf('https://secure.gravatar.com/avatar/%s', md5($this->email)));
+            ->shouldThrow('\InvalidArgumentException')
+            ->during('avatar', [$this->email, ['size' => 9001], true, true]);
     }
 
-    function it_returns_an_avatar_url_without_an_invalid_default_image_option()
+    function it_throws_an_exception_for_an_invalid_default_image_option()
     {
         $this
-            ->avatar($this->email, ['d' => 'foobar'], true, true)
-            ->shouldReturn(sprintf('https://secure.gravatar.com/avatar/%s', md5($this->email)));
+            ->shouldThrow('\InvalidArgumentException')
+            ->during('avatar', [$this->email, ['d' => 'foobar'], true, true]);
 
         $this
-            ->avatar($this->email, ['default' => 'foobar'], true, true)
-            ->shouldReturn(sprintf('https://secure.gravatar.com/avatar/%s', md5($this->email)));
+            ->shouldThrow('\InvalidArgumentException')
+            ->during('avatar', [$this->email, ['default' => 'foobar'], true, true]);
     }
 
-    function it_returns_an_avatar_url_without_an_invalid_force_default_option()
+    function it_throws_an_exception_for_an_invalid_force_default_option()
     {
         $this
-            ->avatar($this->email, ['f' => 'foobar'], true, true)
-            ->shouldReturn(sprintf('https://secure.gravatar.com/avatar/%s', md5($this->email)));
+            ->shouldThrow('\InvalidArgumentException')
+            ->during('avatar', [$this->email, ['f' => 'foobar'], true, true]);
 
         $this
-            ->avatar($this->email, ['forcedefault' => 'foobar'], true, true)
-            ->shouldReturn(sprintf('https://secure.gravatar.com/avatar/%s', md5($this->email)));
+            ->shouldThrow('\InvalidArgumentException')
+            ->during('avatar', [$this->email, ['forcedefault' => 'foobar'], true, true]);
     }
 
-    function it_returns_an_avatar_url_without_an_invalid_rating_option()
+    function it_throws_an_exception_for_an_invalid_rating_option()
     {
         $this
-            ->avatar($this->email, ['r' => 'foobar'], true, true)
-            ->shouldReturn(sprintf('https://secure.gravatar.com/avatar/%s', md5($this->email)));
+            ->shouldThrow('\InvalidArgumentException')
+            ->during('avatar', [$this->email, ['r' => 'foobar'], true, true]);
 
         $this
-            ->avatar($this->email, ['rating' => 'foobar'], true, true)
-            ->shouldReturn(sprintf('https://secure.gravatar.com/avatar/%s', md5($this->email)));
+            ->shouldThrow('\InvalidArgumentException')
+            ->during('avatar', [$this->email, ['rating' => 'foobar'], true, true]);
     }
 
     function it_throws_an_exception_when_avatar_email_is_invalid()
