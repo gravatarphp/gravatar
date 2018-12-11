@@ -91,7 +91,7 @@ If you pass any of the following parameters and turn validation on (fourth param
 * `f`, `forcedefault` -- Tell Gravatar to use the default image even if there is a matching Gravatar
 * `r`, `rating` -- The audience rating (`G`, `R`, etc.) to restrict the Gravatar to
 
-If the value fails validation, the avatar URL will not include that parameter.
+If the value fails validation, an `InvalidArgumentException` will be thrown.
 Any parameters not listed above are not sanitized or validated in anyway.
 
 ## Notes
