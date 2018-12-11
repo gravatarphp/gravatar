@@ -18,6 +18,48 @@ final class Gravatar
     private const HTTPS_ENDPOINT = 'https://secure.gravatar.com';
 
     /**
+     * Minimum image size
+     *
+     * @var int
+     */
+    private const MINIMUM_IMAGE_SIZE = 1;
+
+    /**
+     * Maximum image size
+     *
+     * @var int
+     */
+    private const MAXIMUM_IMAGE_SIZE = 2048;
+
+    /**
+     * Default Image Keywords
+     *
+     * @var array
+     */
+    private const DEFAULT_IMAGE_KEYWORDS = [
+        '404',
+        'mp',
+        'identicon',
+        'monsterid',
+        'wavatar',
+        'retro',
+        'robohash',
+        'blank'
+    ];
+
+    /**
+     * Image ratings
+     *
+     * @var array
+     */
+    private const IMAGE_RATINGS = [
+        'g',
+        'pg',
+        'r',
+        'x'
+    ];
+
+    /**
      * @var array
      */
     private $defaults = [];
@@ -38,10 +80,15 @@ final class Gravatar
     /**
      * Returns an Avatar URL.
      */
-    public function avatar(string $email, array $options = [], ?bool $secure = null): string
+    public function avatar(string $email, array $options = [], ?bool $secure = null, bool $validateOptions = false): string
     {
         $url = 'avatar/'.$this->createEmailHash($email);
+
         $options = array_merge($this->defaults, array_filter($options));
+
+        if ($validateOptions) {
+            $this->validateOptions($options);
+        }
 
         if (!empty($options)) {
             $url .= '?'.http_build_query($options);
@@ -84,6 +131,87 @@ final class Gravatar
         }
 
         return md5(strtolower(trim($email)));
+    }
+
+    private function validateOptions(array $options): array
+    {
+        // Image size
+        if (array_key_exists('s', $options)) {
+            $size = filter_var($options['s'], FILTER_VALIDATE_INT);
+
+            if ($size === false) {
+                throw new \InvalidArgumentException('The size parameter ' . $options['s'] . ' is not an integer.');
+            }
+
+            if ($size < self::MINIMUM_IMAGE_SIZE || $size > self::MAXIMUM_IMAGE_SIZE) {
+                throw new \InvalidArgumentException('The parameter ' . $options['s'] . ' is outside the allowed range of ' . self::MINIMUM_IMAGE_SIZE . ' to ' . self::MAXIMUM_IMAGE_SIZE . '.');
+            }
+        }
+
+        if (array_key_exists('size', $options)) {
+            $size = filter_var($options['size'], FILTER_VALIDATE_INT);
+
+            if ($size === false) {
+                throw new \InvalidArgumentException('The size parameter ' . $options['size'] . ' is not an integer.');
+            }
+
+            if ($size < self::MINIMUM_IMAGE_SIZE || $size > self::MAXIMUM_IMAGE_SIZE) {
+                throw new \InvalidArgumentException('The size parameter ' . $options['size'] . ' is outside the allowed range of ' . self::MINIMUM_IMAGE_SIZE . ' to ' . self::MAXIMUM_IMAGE_SIZE . '.');
+            }
+        }
+
+        // Default image
+        if (array_key_exists('d', $options)) {
+            $defaultImage = $options['d'];
+
+            if (filter_var($defaultImage, FILTER_VALIDATE_URL) === false && !in_array(strtolower($defaultImage), self::DEFAULT_IMAGE_KEYWORDS)) {
+                throw new \InvalidArgumentException('The default image parameter ' . $options['d'] . ' is not a URL or one of the allowed image keywords.');
+            }
+        }
+
+        if (array_key_exists('default', $options)) {
+            $defaultImage = $options['default'];
+
+            if (filter_var($defaultImage, FILTER_VALIDATE_URL) === false && !in_array(strtolower($defaultImage), self::DEFAULT_IMAGE_KEYWORDS)) {
+                throw new \InvalidArgumentException('The default image parameter ' . $options['default'] . ' is not a URL or one of the allowed image keywords.');
+            }
+        }
+
+        // Force Default
+        if (array_key_exists('f', $options)) {
+            $forceDefault = $options['f'];
+
+            if ($forceDefault !== 'y') {
+                throw new \InvalidArgumentException('The force default parameter ' . $options['f'] . ' is invalid.');
+            }
+        }
+
+        if (array_key_exists('forcedefault', $options)) {
+            $forceDefault = $options['forcedefault'];
+
+            if ($forceDefault !== 'y') {
+                throw new \InvalidArgumentException('The force default parameter ' . $options['forcedefault'] . ' is invalid.');
+            }
+        }
+
+        // Rating
+        if (array_key_exists('r', $options)) {
+            $rating = strtolower($options['r']);
+
+            if (!in_array($rating, self::IMAGE_RATINGS)) {
+                throw new \InvalidArgumentException('The rating parameter ' . $options['r'] . ' is invalid.');
+            }
+        }
+
+        if (array_key_exists('rating', $options)) {
+            $rating = strtolower($options['rating']);
+
+            if (!in_array($rating, self::IMAGE_RATINGS)) {
+                throw new \InvalidArgumentException('The rating parameter ' . $options['rating'] . ' is invalid.');
+            }
+        }
+
+        return $options;
     }
 
     /**

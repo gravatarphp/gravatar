@@ -32,6 +32,11 @@ $gravatar = new Gravatar([], true);
 // Returns https://secure.gravatar.com/avatar/EMAIL_HASH
 $gravatar->avatar('user@domain.com');
 
+// Returns https://secure.gravatar.com/avatar/EMAIL_HASH
+// The fourth parameter enables validation and will prevent the
+// size parameter from being added to the URL generated.
+$gravatar->avatar('user@domain.com', ['s' => 9001], true, true);
+
 // Returns https://secure.gravatar.com/EMAIL_HASH
 $gravatar->profile('user@domain.com');
 
@@ -77,11 +82,21 @@ $gravatar = new Gravatar([
 $gravatar->avatar('user@domain.com', ['r' => 'g']);
 ```
 
+## Parameters
 
-**Note:** Parameters are not sanitized or validated in anyway. For valid parameters check the [Gravatar documentation](http://gravatar.com/site/implement/).
+If you pass any of the following parameters and turn validation on (fourth parameter in the `avatar()` method), their values will be checked against the allowed values defined in the [Gravatar documentation](http://gravatar.com/site/implement/):
 
+* `s`, `size` -- The image size
+* `d`, `default` -- The default image to display if there is no matching Gravatar
+* `f`, `forcedefault` -- Tell Gravatar to use the default image even if there is a matching Gravatar
+* `r`, `rating` -- The audience rating (`G`, `R`, etc.) to restrict the Gravatar to
 
-**Note:** Profile, vCard and QR Code requests will only work with the primary email address. This is a limitation of Gravatar. However the builder won't complain, since it doesn't know if it is your primary address or not. For more tips and details check the [Gravatar documentation](http://gravatar.com/site/implement/).
+If the value fails validation, an `InvalidArgumentException` will be thrown.
+Any parameters not listed above are not sanitized or validated in anyway.
+
+## Notes
+
+Profile, vCard and QR Code requests will only work with the primary email address. This is a limitation of Gravatar. However the builder won't complain, since it doesn't know if it is your primary address or not. For more tips and details check the [Gravatar documentation](http://gravatar.com/site/implement/).
 
 
 ## Testing
