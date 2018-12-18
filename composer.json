@@ -14,7 +14,7 @@
         "php": "^7.1"
     },
     "require-dev": {
-        "phpspec/phpspec": "^4.1"
+        "phpspec/phpspec": "^5.1"
     },
     "autoload": {
         "psr-4": {
