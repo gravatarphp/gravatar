@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 
 - Scalar typehints
+- Added validation for the parameters passed while generating the gravatar for more info check [here](https://github.com/gravatarphp/gravatar#parameters)
 
 
 ### Removed
