@@ -11,10 +11,10 @@
         }
     ],
     "require": {
-        "php": "^7.1"
+        "php": ">=7.1"
     },
     "require-dev": {
-        "phpspec/phpspec": "^5.1"
+        "phpspec/phpspec": "^5.1|^7.0.1"
     },
     "autoload": {
         "psr-4": {
