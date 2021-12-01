@@ -1,3 +1,4 @@
+/.direnv/
 /build/
 /composer.lock
 /phpspec.yml

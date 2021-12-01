@@ -2,7 +2,12 @@
     "name": "gravatarphp/gravatar",
     "description": "Gravatar URL builder which is most commonly called as a Gravatar library",
     "license": "MIT",
-    "keywords": ["gravatar", "avatar", "image", "profile"],
+    "keywords": [
+        "gravatar",
+        "avatar",
+        "image",
+        "profile"
+    ],
     "homepage": "http://gravatarphp.com",
     "authors": [
         {
@@ -14,7 +19,7 @@
         "php": ">=7.1"
     },
     "require-dev": {
-        "phpspec/phpspec": "^5.1|^7.0.1"
+        "phpspec/phpspec": "^5.1 || ^7.0.1"
     },
     "autoload": {
         "psr-4": {
@@ -27,12 +32,11 @@
         }
     },
     "scripts": {
-        "test": "vendor/bin/phpspec run",
-        "test-ci": "vendor/bin/phpspec run"
+        "test": "vendor/bin/phpspec run"
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "1.0-dev"
+            "dev-master": "2.1-dev"
         }
     },
     "prefer-stable": true,
